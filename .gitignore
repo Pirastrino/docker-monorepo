@@ -116,4 +116,5 @@ dist
 .pnp.*
 
 # Custom
-.vscode/
+.vscode
+data
