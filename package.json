@@ -1,0 +1,17 @@
+{
+  "name": "project",
+  "version": "0.0.1",
+  "author": "Martin Began <martin.began@kiwi.com>",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.22.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.3"
+  }
+}
