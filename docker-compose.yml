@@ -1,9 +1,42 @@
-version: "3.9"
 services:
+
+  db:
+    image: postgres:13.2-alpine
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pg-local
+      PGDATA: /pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - ./data/pg-local:/pgdata
+    ports:
+      - 5432:5432
+
+  api:
+    container_name: api
+    build:
+      context: ./packages
+      dockerfile: Dockerfile.api
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db:db
+    volumes:
+      - ./packages/api:/api
+      - /api/node_modules
+    ports:
+      - 3001:3001
+
   frontend:
     container_name: frontend
-    ports:
-      - "3000:3000"
     build:
       context: ./packages 
       dockerfile: Dockerfile.frontend
@@ -11,3 +44,5 @@ services:
       - ./packages/frontend:/frontend
       - /frontend/node_modules
       - /frontend/.next
+    ports:
+      - 3000:3000

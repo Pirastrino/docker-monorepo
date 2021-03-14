@@ -1,7 +1,6 @@
 {
   "name": "@project/app",
   "version": "0.0.1",
-  "author": "Martin Began <martin.began@kiwi.com>",
   "private": true,
   "scripts": {
     "dev": "next dev",

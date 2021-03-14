@@ -1,0 +1,12 @@
+FROM node:15.11.0-alpine3.13
+
+WORKDIR /api
+
+COPY ./tsconfig.settings.json ../
+COPY ./api ./
+
+RUN yarn
+
+EXPOSE 3001
+
+CMD ["yarn", "dev"]
